@@ -12,7 +12,7 @@ Plug 'tpope/vim-surround'
 Plug 'alvan/vim-closetag'
 Plug 'mattn/emmet-vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
+" Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
 Plug 'machakann/vim-swap'
 Plug 'christoomey/vim-sort-motion'
 
@@ -25,10 +25,12 @@ Plug 'gregsexton/MatchTag'
 Plug 'airblade/vim-gitgutter'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'hzchirs/vim-material'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'flazz/vim-colorschemes'
-Plug 'vim-airline/vim-airline'
-Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Yggdroot/indentLine'
+Plug 'ayu-theme/ayu-vim'
 
 " search
 Plug 'rking/ag.vim'
@@ -49,6 +51,13 @@ Plug 'skywind3000/asyncrun.vim'
 
 " complete
 " Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 " javascript
 Plug 'othree/javascript-libraries-syntax.vim'
@@ -60,7 +69,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
 Plug 'heavenshell/vim-jsdoc', {'for': ['javascript', 'jsx', 'typescript']}
 Plug 'Quramy/tsuquyomi'
-" Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/async.vim'
 " Plug 'prabirshrestha/vim-lsp'
 " Plug 'prabirshrestha/asyncomplete.vim'
 " Plug 'prabirshrestha/asyncomplete-lsp.vim'
@@ -87,7 +96,12 @@ endif
 
 " Dark
 set background=dark
-colorscheme vim-material
+" let ayucolor="light"  " for light version of theme
+let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
+
+" colorscheme vim-material
 
 " Palenight
 " let g:material_style='palenight'
@@ -106,7 +120,6 @@ colorscheme vim-material
 
 set t_Co=256
 set background=dark
-
 
 syntax on
 
@@ -276,7 +289,6 @@ vnoremap > >gv
 nmap <leader>f :NERDTreeToggle<CR>
 nmap <leader>r :NERDTreeFind<CR>
 
-let g:airline_theme = 'material'
 let g:python2_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
@@ -289,6 +301,11 @@ let NERDTreeWinPos = "right"
 let NERDTreeShowBookmarks = 1
 let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc', '\.pkl', '\.jpeg', '\.png', '\.class']
 let NERDTreeChDirMode = 2
+
+
+" [airline]
+" ====================================
+let g:airline_theme = 'ayu'
 
 " [ctrlp]
 " ====================================
@@ -311,8 +328,8 @@ autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 " [file type]
 " ====================================
-autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
-autocmd FileType javascript,json,css,scss,html set tabstop=2 shiftwidth=2 expandtab ai
+" autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
+" autocmd FileType javascript,json,css,scss,html set tabstop=4 shiftwidth=4 expandtab ai
 autocmd BufReadPre * if getfsize(expand("%")) > 10000000 | syntax off | endif
 
 " [emmet]
@@ -348,12 +365,19 @@ nmap <silent> <leader>gcf :Gcommit -a --amend<cr>
 
 " [Indent guides]
 " ====================================
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
+" let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_guide_size = 1
+" let g:indent_guides_auto_colors = 0
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#3a4c55   ctermbg=2
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#465c67 ctermbg=2
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#314049   ctermbg=2
+
+" Material theme
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#314049 ctermbg=2
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#2d3b43 ctermbg=2
+
+" ayu theme
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#30394A ctermbg=2
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#364054 ctermbg=2
 
 " [MatchTagh]
 " ====================================
@@ -368,24 +392,25 @@ let g:ctrlsf_default_root = 'project'
 
 " [YouCompleteMe]
 " ====================================
-set completeopt-=preview
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_add_preview_to_completeopt = 0
+" set completeopt-=preview
+" let g:ycm_show_diagnostics_ui = 0
+" let g:ycm_add_preview_to_completeopt = 0
+" let g:ycm_filetype_blacklist = { 'fugitive': 1 }
 " autocmd BufWritePost *.ts YcmForceCompileAndDiagnostics
 
 " [Syntastic]
 " ====================================
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_w = 0
-let g:syntastic_typescript_checkers = ['tsuquyomi']
-let g:syntastic_javascript_checkers=['eslint']
-let g:tsuquyomi_disable_quickfix = 1
-let g:syntastic_mode_map = { 'mode': 'passive' }
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 0
+" let g:syntastic_auto_loc_list = 0
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_w = 0
+" let g:syntastic_typescript_checkers = ['tsuquyomi']
+" let g:syntastic_javascript_checkers=['eslint']
+" let g:tsuquyomi_disable_quickfix = 1
+" let g:syntastic_mode_map = { 'mode': 'passive' }
 " let g:syntastic_debug = 3
 
 " [vim-typescript]
@@ -424,3 +449,23 @@ let g:wildfire_objects = {
 \ }
 let g:wildfire_fuel_map = "<ENTER>"
 let g:wildfire_water_map = "<BS>"
+
+" ----------------------------------------------------------------------------
+" vim-sync.vim
+" ----------------------------------------------------------------------------
+let g:sync_async_upload = 0
+
+" Tab bar color
+hi TabLine gui=NONE guibg=#212733 guifg=#abb2bf 
+hi TabLineFill gui=NONE guibg=#212733 guifg=#abb2bf
+hi TabLineSel gui=NONE guibg=#343F4C guifg=#abb2bf
+
+" Search highlight color
+" hi QuickFixLine term=reverse guibg=Cyan
+" hi Substitute term=reverse guibg=Cyan
+hi Search term=reverse ctermfg=0 ctermbg=222 guifg=#000000 guibg=#FFE792
+
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"

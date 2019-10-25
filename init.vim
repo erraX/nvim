@@ -31,6 +31,7 @@ Plug 'flazz/vim-colorschemes'
 " Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Yggdroot/indentLine'
 Plug 'ayu-theme/ayu-vim'
+Plug 'skielbasa/vim-material-monokai'
 
 " search
 Plug 'rking/ag.vim'
@@ -46,7 +47,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'embear/vim-localvimrc'
 Plug 'vim-syntastic/syntastic'
-Plug 'eshion/vim-sync'
+Plug 'erraX/vim-sync'
 Plug 'skywind3000/asyncrun.vim'
 
 " complete
@@ -75,7 +76,6 @@ Plug 'prabirshrestha/async.vim'
 " Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'ryanolsonx/vim-lsp-javascript'
 
-
 call plug#end()
 
 "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -96,11 +96,19 @@ endif
 
 " Dark
 set background=dark
-" let ayucolor="light"  " for light version of theme
-let ayucolor="mirage" " for mirage version of theme
-" let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+colorscheme material-monokai
+let g:materialmonokai_italic=1
 
+
+" Ayu theme
+" ---------------------------
+" let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+" colorscheme ayu
+
+" Material theme
+" ---------------------------
 " colorscheme vim-material
 
 " Palenight
@@ -248,6 +256,9 @@ nmap <leader>w :w!<CR>
 nmap <leader>i :split<CR>
 nmap <leader>v :vsplit<CR>
 
+nnoremap <C-s> :w!<CR>
+nnoremap <C-q> :q!<CR>
+
 " Tab navtigation
 nnoremap H :tabprevious<CR>
 nnoremap L :tabnext<CR>
@@ -305,7 +316,7 @@ let NERDTreeChDirMode = 2
 
 " [airline]
 " ====================================
-let g:airline_theme = 'ayu'
+let g:airline_theme = 'materialmonokai'
 
 " [ctrlp]
 " ====================================
@@ -424,7 +435,7 @@ autocmd QuickFixCmdPost    l* nested lwindow
 " [vim-sync]
 " ====================================
 " Upload file on save
-autocmd BufWritePost * :call SyncUploadFile()
+autocmd BufWritePost * :silent call SyncUploadFile()
 
 "Load local settings
 if filereadable(expand("~/.vim/vimrc.local"))
@@ -453,7 +464,8 @@ let g:wildfire_water_map = "<BS>"
 " ----------------------------------------------------------------------------
 " vim-sync.vim
 " ----------------------------------------------------------------------------
-let g:sync_async_upload = 0
+let g:sync_async_upload = 1
+let g:sync_async_silent = 0
 
 " Tab bar color
 hi TabLine gui=NONE guibg=#212733 guifg=#abb2bf 
@@ -469,3 +481,8 @@ hi Search term=reverse ctermfg=0 ctermbg=222 guifg=#000000 guibg=#FFE792
 " deoplete
 let g:deoplete#enable_at_startup = 1
 inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags

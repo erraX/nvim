@@ -221,6 +221,8 @@ set incsearch
 autocmd InsertEnter * :set norelativenumber " no relativenumber in insert mode
 autocmd InsertLeave * :set relativenumber   " show relativenumber when leave insert mode
 
+" leader key
+let mapleader = ","
 
 " Key binding
 
@@ -228,10 +230,6 @@ autocmd InsertLeave * :set relativenumber   " show relativenumber when leave ins
 inoremap <C-o> <Esc>o
 inoremap <C-a> <Home> " not working
 inoremap <C-e> <End> " not working
-
-
-" select all
-noremap <Leader>sa ggVG
 
 " Disable higlighting search result on Enter key
 nnoremap <silent> <cr> :nohlsearch<cr><cr>
@@ -241,14 +239,17 @@ nnoremap <silent> <cr> :nohlsearch<cr><cr>
 vnoremap <C-c> "*y
 " vnoremap Y "+y
 
+" nnoremap p ]p
+nnoremap p p=`]
+nnoremap <leader> p
+
 " Speed up scrolling of the viewport slightly
 nnoremap <C-e> 2<C-e>
 nnoremap <C-y> 2<C-y>
 
-nnoremap ; :
+" nnoremap ; :
 
-" leader key
-let mapleader = ","
+noremap <leader>sa ggVG
 nnoremap <leader>e :q!<CR>
 nnoremap <leader>E :qa!<CR>
 nmap <leader>src :source ~/.config/nvim/init.vim<CR>
@@ -465,7 +466,7 @@ let g:wildfire_water_map = "<BS>"
 " vim-sync.vim
 " ----------------------------------------------------------------------------
 let g:sync_async_upload = 1
-let g:sync_async_silent = 0
+let g:sync_async_silent = 1
 
 " Tab bar color
 hi TabLine gui=NONE guibg=#212733 guifg=#abb2bf 

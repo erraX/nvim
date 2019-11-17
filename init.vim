@@ -2,488 +2,227 @@
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-" edit
-Plug 'gcmt/wildfire.vim'
-Plug 'godlygeek/tabular'
-Plug 'Raimondi/delimitMate'
-Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'alvan/vim-closetag'
-Plug 'mattn/emmet-vim'
-Plug 'terryma/vim-multiple-cursors'
-" Plug 'Chiel92/vim-autoformat', {'on': 'Autoformat'}
-Plug 'machakann/vim-swap'
-Plug 'christoomey/vim-sort-motion'
+" Specify a directory for plugins
+" call plug#begin('~/.vim/plugged')
 
-" quick motion
-Plug 'unblevable/quick-scope'
-Plug 'easymotion/vim-easymotion'
-Plug 'gregsexton/MatchTag'
-
-" display
-Plug 'airblade/vim-gitgutter'
-Plug 'gorodinskiy/vim-coloresque'
-Plug 'hzchirs/vim-material'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'flazz/vim-colorschemes'
-" Plug 'nathanaelkane/vim-indent-guides'
-Plug 'Yggdroot/indentLine'
-Plug 'ayu-theme/ayu-vim'
-Plug 'skielbasa/vim-material-monokai'
-
-" search
-Plug 'rking/ag.vim'
-Plug 'kien/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
-Plug 'dyng/ctrlsf.vim', {'on': '<Plug>CtrlSFVwordExec'}
-Plug 'ggVGc/vim-fuzzysearch'
-
-" tools
-Plug 'editorconfig/editorconfig-vim'
-Plug 'tpope/vim-fugitive'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
-Plug 'xuyuanp/nerdtree-git-plugin'
-Plug 'embear/vim-localvimrc'
-Plug 'vim-syntastic/syntastic'
-Plug 'erraX/vim-sync'
-Plug 'skywind3000/asyncrun.vim'
+"Plug 'tsony-tsonev/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
+Plug 'scrooloose/nerdcommenter'
+"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
-" complete
-" Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'christoomey/vim-tmux-navigator'
 
-" javascript
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'posva/vim-vue'
-Plug 'pangloss/vim-javascript'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'mxw/vim-jsx'
-Plug 'heavenshell/vim-jsdoc', {'for': ['javascript', 'jsx', 'typescript']}
-Plug 'Quramy/tsuquyomi'
-Plug 'prabirshrestha/async.vim'
-" Plug 'prabirshrestha/vim-lsp'
-" Plug 'prabirshrestha/asyncomplete.vim'
-" Plug 'prabirshrestha/asyncomplete-lsp.vim'
-" Plug 'ryanolsonx/vim-lsp-javascript'
+Plug 'morhetz/gruvbox'
 
+Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
+
+" Initialize plugin system
 call plug#end()
 
-"For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-if (has("nvim"))
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
+inoremap jk <ESC>
+nmap <C-n> :NERDTreeToggle<CR>
+vmap ++ <plug>NERDCommenterToggle
+nmap ++ <plug>NERDCommenterToggle
 
-" Color scheme related
+" open NERDTree automatically
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * NERDTree
 
-"For Neovim > 0.1.5 and Vim >atch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-""Based on Vimatch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-if (has("termguicolors"))
-    set t_8f=^[[38;2;%lu;%lu;%lum  " Needed in tmux
-    set t_8b=^[[48;2;%lu;%lu;%lum  " Ditto
-    set termguicolors
-endif
-
-" Dark
-set background=dark
-colorscheme material-monokai
-let g:materialmonokai_italic=1
-
-
-" Ayu theme
-" ---------------------------
-" let ayucolor="light"  " for light version of theme
-" let ayucolor="mirage" " for mirage version of theme
-" let ayucolor="dark"   " for dark version of theme
-" colorscheme ayu
-
-" Material theme
-" ---------------------------
-" colorscheme vim-material
-
-" Palenight
-" let g:material_style='palenight'
-" set background=dark
-" colorscheme vim-material
-
-" Oceanic
-" let g:material_style='oceanic'
-" set background=dark
-" colorscheme vim-material
-
-" Light
-" set background=light
-" colorscheme vim-material
+let g:NERDTreeGitStatusWithFlags = 1
+"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+"let g:NERDTreeGitStatusNodeColorization = 1
+"let g:NERDTreeColorMapCustom = {
+    "\ "Staged"    : "#0ee375",  
+    "\ "Modified"  : "#d9bf91",  
+    "\ "Renamed"   : "#51C9FC",  
+    "\ "Untracked" : "#FCE77C",  
+    "\ "Unmerged"  : "#FC51E6",  
+    "\ "Dirty"     : "#FFBD61",  
+    "\ "Clean"     : "#87939A",   
+    "\ "Ignored"   : "#808080"   
+    "\ }                         
 
 
-set t_Co=256
-set background=dark
+let g:NERDTreeIgnore = ['^node_modules$']
 
-syntax on
+" vim-prettier
+"let g:prettier#quickfix_enabled = 0
+"let g:prettier#quickfix_auto_focus = 0
+" prettier command for coc
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" run prettier on save
+"let g:prettier#autoformat = 0
+"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
-set ttyfast
-set lazyredraw
-set noshowcmd
-set nocompatible
-set shortmess=atI
 
-" Settings
-set number
-set nowrap
-" Copy indent from previous line
-set autoindent
-" Enable smart indent. it add additional indents whe necessary
-set smartindent
-" Replace tabs with spaces
-set expandtab
-" Whe you hit tab at start of line, indent added according to shiftwidth value
+" ctrlp
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" j/k will move virtual lines (lines that wrap)
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+set relativenumber
+
 set smarttab
-" number of spaces to use for each step of indent
-set shiftwidth=4
-" Number of spaces that a Tab in the file counts for
-set tabstop=4
-" Same but for editing operation (not shure what exactly does it means)
-" but in most cases tabstop and softtabstop better be the same
-set softtabstop=4
-" Round indent to multiple of 'shiftwidth'.
-" Indentation always be multiple of shiftwidth
-" Applies to  < and > command
-set shiftround
-" Disable backups file
-set nobackup
-" Disable vim common sequense for saving.
-" By defalut vim write buffer to a new file, then delete original file
-" then rename the new file.
-set nowritebackup
-" Disable swp files
-set noswapfile
-" Do not add eol at the end of file.
-set noeol
-" Buffer will be hidden instead of closed when no one display it
-set hidden
-" Auto reload changed files
-set autoread
-" Always change current dirrectory to current-editing-file dir
-set autochdir
-" Indicates fast terminal connection
-set ttyfast
+set cindent
+set tabstop=2
+set shiftwidth=2
+" always uses spaces instead of tab characters
+set expandtab
 
-set modifiable
+colorscheme gruvbox
 
+" sync open file with NERDTree
+" " Check if NERDTree is open or active
+function! IsNERDTreeOpen()        
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
 
-"==========================================
-" FileEncode Settings 文件编码,格式
-"==========================================
-" 设置新文件的编码为 UTF-8
-set encoding=utf-8
-" 自动判断编码时，依次尝试以下编码：
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-set helplang=cn
-"set langmenu=zh_CN.UTF-8
-"set enc=2byte-gb18030
-" 下面这句只影响普通模式 (非图形界面) 下的 Vim
-set termencoding=utf-8
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
 
-" 如遇Unicode值大于255的文本，不必等到空格再折行
-set formatoptions+=m
-" 合并两行中文时，不在中间加空格
-set formatoptions+=B
+" Highlight currently open buffer in NERDTree
+" autocmd BufEnter * call SyncTree()
 
-" Show file name in window title
-set title
-" Mute error bell
-set novisualbell
-" Numbers of rows to keep to the left and to the right off the screen
-set scrolloff=7
-" Numbers of columns to keep to the left and to the right off the screen
-set sidescrolloff=7
-" Highlight search results
-set hlsearch
-" Ignore case in search patterns
-set ignorecase
-" Override the 'ignorecase' option if the search patter ncontains upper case characters
-set smartcase
-" Live search. While typing a search command, show where the pattern
-set incsearch
+" coc config
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint', 
+  \ 'coc-prettier', 
+  \ 'coc-json', 
+  \ ]
+" from readme
+" if hidden is not set, TextEdit might fail.
+set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
 
-autocmd InsertEnter * :set norelativenumber " no relativenumber in insert mode
-autocmd InsertLeave * :set relativenumber   " show relativenumber when leave insert mode
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
 
-" leader key
-let mapleader = ","
+" always show signcolumns
+set signcolumn=yes
 
-" Key binding
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" Quick move in insert mode
-inoremap <C-o> <Esc>o
-inoremap <C-a> <Home> " not working
-inoremap <C-e> <End> " not working
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-" Disable higlighting search result on Enter key
-nnoremap <silent> <cr> :nohlsearch<cr><cr>
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
 
-" Clipboard
-" set clipboard=unnamed
-vnoremap <C-c> "*y
-" vnoremap Y "+y
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" nnoremap p ]p
-nnoremap p p=`]
-nnoremap <leader> p
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" Speed up scrolling of the viewport slightly
-nnoremap <C-e> 2<C-e>
-nnoremap <C-y> 2<C-y>
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-" nnoremap ; :
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-noremap <leader>sa ggVG
-nnoremap <leader>e :q!<CR>
-nnoremap <leader>E :qa!<CR>
-nmap <leader>src :source ~/.config/nvim/init.vim<CR>
-nmap <leader>w :w!<CR>
-nmap <leader>i :split<CR>
-nmap <leader>v :vsplit<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
-nnoremap <C-s> :w!<CR>
-nnoremap <C-q> :q!<CR>
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Tab navtigation
-nnoremap H :tabprevious<CR>
-nnoremap L :tabnext<CR>
+" Remap for rename current word
+nmap <F2> <Plug>(coc-rename)
 
-" map jk to escape
-inoremap jk <esc>
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
-" 快速移动
-nnoremap j gj
-nnoremap k gk
-nnoremap 0 ^
-nnoremap <C-j> 5j
-nnoremap <C-k> 5k
-nnoremap <C-l> 5l
-nnoremap <C-h> 5h
-vnoremap <C-j> 5j
-vnoremap <C-k> 5k
-vnoremap <C-l> 5l
-vnoremap <C-h> 5h
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
-" 退出
-nnoremap <leader>e :q!<CR>
-nnoremap <leader>E :qa!<CR>
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-nmap <leader>w :w!<CR>
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
 
-nmap <leader>i :split<CR>
-nmap <leader>v :vsplit<CR>
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
 
-" 缩进
-vnoremap < <gv
-vnoremap > >gv
+" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <C-d> <Plug>(coc-range-select)
+xmap <silent> <C-d> <Plug>(coc-range-select)
 
-" Plugin Configs
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
 
-" [NERDtree]
-" ====================================
-" Display current file in the NERDTree ont the left
-nmap <leader>f :NERDTreeToggle<CR>
-nmap <leader>r :NERDTreeFind<CR>
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
-let g:python2_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" Tell NERDTree to display hidden files on startup
-let NERDTreeShowHidden=1
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" Disable bookmarks label, and hint about '?'
-" let NERDTreeMinimalUI=1
-let NERDTreeWinPos = "right"
-let NERDTreeShowBookmarks = 1
-let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc', '\.pkl', '\.jpeg', '\.png', '\.class']
-let NERDTreeChDirMode = 2
-
-
-" [airline]
-" ====================================
-let g:airline_theme = 'materialmonokai'
-
-" [ctrlp]
-" ====================================
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](node_modules|target|dist|coverage)|\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz)$',
-    \ }
-let g:ctrlp_follow_symlinks = 1
-let g:ctrlp_mruf_relative = 1
-let g:ctrlp_mruf_exclude = '/tmp/.*\|/temp/.*'
-
-" [vim-vue]
-" ====================================
-let g:vue_disable_pre_processors = 1
-autocmd FileType vue syntax sync fromstart
-" au BufRead,BufNewFile *.vue set filetype=html
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
-
-
-" [file type]
-" ====================================
-" autocmd FileType python set tabstop=4 shiftwidth=4 expandtab ai
-" autocmd FileType javascript,json,css,scss,html set tabstop=4 shiftwidth=4 expandtab ai
-autocmd BufReadPre * if getfsize(expand("%")) > 10000000 | syntax off | endif
-
-" [emmet]
-" ====================================
-let g:user_emmet_leader_key = 'zz'
-
-" [localvimrc]
-" ====================================
-let g:localvimrc_ask = 0
-
-" [Fugitive]
-" ====================================
-
-" Blame on current line
-nmap <silent> <leader>b :Gblame<cr>
-" Blame on all selected lines in visual mode
-" vmap <silent> <leader>b :Gblame<cr>
-" Git status
-nmap <silent> <leader>gst :Gstatus<cr>
-" like git add
-nmap <silent> <leader>ga :Gwrite<cr>
-" like git checkout
-nmap <silent> <leader>gr :Gread<cr>
-" git diff
-nmap <silent> <leader>gd :Gvdiff<cr>
-" git commit
-nmap <silent> <leader>gc :Gcommit<cr>
-" git commit all
-nmap <silent> <leader>gca :Gcommit -a<cr>
-" git fixup previous commit
-nmap <silent> <leader>gcf :Gcommit -a --amend<cr>
-
-
-" [Indent guides]
-" ====================================
-" let g:indent_guides_enable_on_vim_startup = 1
-" let g:indent_guides_guide_size = 1
-" let g:indent_guides_auto_colors = 0
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#3a4c55   ctermbg=2
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#465c67 ctermbg=2
-
-" Material theme
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#314049 ctermbg=2
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#2d3b43 ctermbg=2
-
-" ayu theme
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#30394A ctermbg=2
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#364054 ctermbg=2
-
-" [MatchTagh]
-" ====================================
-" hi MatchParen ctermbg=NONE ctermfg=10 guibg=#34454e guifg=#ffffff cterm=BOLD gui=BOLD
-hi MatchParen ctermbg=NONE ctermfg=10 guibg=#34454e
-
-" [CtrlF]
-" ====================================
-noremap <C-f> :CtrlSF 
-let g:ctrlsf_default_view_mode = 'compact'
-let g:ctrlsf_default_root = 'project'
-
-" [YouCompleteMe]
-" ====================================
-" set completeopt-=preview
-" let g:ycm_show_diagnostics_ui = 0
-" let g:ycm_add_preview_to_completeopt = 0
-" let g:ycm_filetype_blacklist = { 'fugitive': 1 }
-" autocmd BufWritePost *.ts YcmForceCompileAndDiagnostics
-
-" [Syntastic]
-" ====================================
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 0
-" let g:syntastic_auto_loc_list = 0
-" let g:syntastic_check_on_open = 0
-" let g:syntastic_check_on_w = 0
-" let g:syntastic_typescript_checkers = ['tsuquyomi']
-" let g:syntastic_javascript_checkers=['eslint']
-" let g:tsuquyomi_disable_quickfix = 1
-" let g:syntastic_mode_map = { 'mode': 'passive' }
-" let g:syntastic_debug = 3
-
-" [vim-typescript]
-" ====================================
-let g:typescript_compiler_binary = 'tsc'
-let g:typescript_compiler_options = ''
-let g:tsuquyomi_use_dev_node_module = 1
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost    l* nested lwindow
-
-" [vim-sync]
-" ====================================
-" Upload file on save
-autocmd BufWritePost * :silent call SyncUploadFile()
-
-"Load local settings
-if filereadable(expand("~/.vim/vimrc.local"))
-  source ~/.vim/vimrc.local
-endif
-
-" ----------------------------------------------------------------------------
-" vim-easymotion
-" ----------------------------------------------------------------------------
-map <space> <Plug>(easymotion-s2)
-" map  / <Plug>(easymotion-sn)
-" omap / <Plug>(easymotion-tn)
-let g:EasyMotion_smartcase = 1
-
-" ----------------------------------------------------------------------------
-" wildfire.vim
-" Mapping: <Enter>
-" ----------------------------------------------------------------------------
-let g:wildfire_objects = {
-    \ "*" : ["i'", 'i"', "i)", "i]", "i}", "ip"],
-    \ "html,xml" : ["at"],
-\ }
-let g:wildfire_fuel_map = "<ENTER>"
-let g:wildfire_water_map = "<BS>"
-
-" ----------------------------------------------------------------------------
-" vim-sync.vim
-" ----------------------------------------------------------------------------
-let g:sync_async_upload = 1
-let g:sync_async_silent = 1
-
-" Tab bar color
-hi TabLine gui=NONE guibg=#212733 guifg=#abb2bf 
-hi TabLineFill gui=NONE guibg=#212733 guifg=#abb2bf
-hi TabLineSel gui=NONE guibg=#343F4C guifg=#abb2bf
-
-" Search highlight color
-" hi QuickFixLine term=reverse guibg=Cyan
-" hi Substitute term=reverse guibg=Cyan
-hi Search term=reverse ctermfg=0 ctermbg=222 guifg=#000000 guibg=#FFE792
-
-
-" deoplete
-let g:deoplete#enable_at_startup = 1
-inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>

@@ -24,14 +24,14 @@ Plug 'gregsexton/MatchTag'
 " display
 Plug 'airblade/vim-gitgutter'
 Plug 'gorodinskiy/vim-coloresque'
-Plug 'hzchirs/vim-material'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'flazz/vim-colorschemes'
 " Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Yggdroot/indentLine'
-Plug 'ayu-theme/ayu-vim'
-Plug 'skielbasa/vim-material-monokai'
+Plug 'morhetz/gruvbox'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " search
 Plug 'rking/ag.vim'
@@ -51,14 +51,7 @@ Plug 'erraX/vim-sync'
 Plug 'skywind3000/asyncrun.vim'
 
 " complete
-" Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " javascript
 Plug 'othree/javascript-libraries-syntax.vim'
@@ -66,15 +59,9 @@ Plug 'posva/vim-vue'
 Plug 'pangloss/vim-javascript'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
 Plug 'heavenshell/vim-jsdoc', {'for': ['javascript', 'jsx', 'typescript']}
-Plug 'Quramy/tsuquyomi'
-Plug 'prabirshrestha/async.vim'
-" Plug 'prabirshrestha/vim-lsp'
-" Plug 'prabirshrestha/asyncomplete.vim'
-" Plug 'prabirshrestha/asyncomplete-lsp.vim'
-" Plug 'ryanolsonx/vim-lsp-javascript'
+Plug 'HerringtonDarkholme/yats.vim'
 
 call plug#end()
 
@@ -96,30 +83,8 @@ endif
 
 " Dark
 set background=dark
-colorscheme material-monokai
-let g:materialmonokai_italic=1
-
-
-" Ayu theme
-" ---------------------------
-" let ayucolor="light"  " for light version of theme
-" let ayucolor="mirage" " for mirage version of theme
-" let ayucolor="dark"   " for dark version of theme
-" colorscheme ayu
-
-" Material theme
-" ---------------------------
-" colorscheme vim-material
-
-" Palenight
-" let g:material_style='palenight'
-" set background=dark
-" colorscheme vim-material
-
-" Oceanic
-" let g:material_style='oceanic'
-" set background=dark
-" colorscheme vim-material
+" colorscheme material-monokai
+colorscheme gruvbox
 
 " Light
 " set background=light
@@ -127,7 +92,6 @@ let g:materialmonokai_italic=1
 
 
 set t_Co=256
-set background=dark
 
 syntax on
 
@@ -317,7 +281,8 @@ let NERDTreeChDirMode = 2
 
 " [airline]
 " ====================================
-let g:airline_theme = 'materialmonokai'
+" let g:airline_theme = 'materialmonokai'
+" let g:airline_theme = 'gruvbox'
 
 " [ctrlp]
 " ====================================
@@ -383,10 +348,6 @@ nmap <silent> <leader>gcf :Gcommit -a --amend<cr>
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#3a4c55   ctermbg=2
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#465c67 ctermbg=2
 
-" Material theme
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#314049 ctermbg=2
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#2d3b43 ctermbg=2
-
 " ayu theme
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#30394A ctermbg=2
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#364054 ctermbg=2
@@ -394,7 +355,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#2d3b43 ctermbg=2
 " [MatchTagh]
 " ====================================
 " hi MatchParen ctermbg=NONE ctermfg=10 guibg=#34454e guifg=#ffffff cterm=BOLD gui=BOLD
-hi MatchParen ctermbg=NONE ctermfg=10 guibg=#34454e
 
 " [CtrlF]
 " ====================================
@@ -424,14 +384,6 @@ let g:ctrlsf_default_root = 'project'
 " let g:tsuquyomi_disable_quickfix = 1
 " let g:syntastic_mode_map = { 'mode': 'passive' }
 " let g:syntastic_debug = 3
-
-" [vim-typescript]
-" ====================================
-let g:typescript_compiler_binary = 'tsc'
-let g:typescript_compiler_options = ''
-let g:tsuquyomi_use_dev_node_module = 1
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost    l* nested lwindow
 
 " [vim-sync]
 " ====================================
@@ -478,12 +430,133 @@ hi TabLineSel gui=NONE guibg=#343F4C guifg=#abb2bf
 " hi Substitute term=reverse guibg=Cyan
 hi Search term=reverse ctermfg=0 ctermbg=222 guifg=#000000 guibg=#FFE792
 
+" coc
+" coc config
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint', 
+  \ 'coc-prettier', 
+  \ 'coc-json', 
+  \ 'coc-vetur', 
+  \ ]
 
-" deoplete
-let g:deoplete#enable_at_startup = 1
-inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript,javascript.jsx setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <F2> <Plug>(coc-rename)
+
+" Remap for format selected region
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+" nmap <silent> <C-d> <Plug>(coc-range-select)
+" xmap <silent> <C-d> <Plug>(coc-range-select)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+

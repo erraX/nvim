@@ -18,10 +18,6 @@ local mappings = {
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 
   -- Telescope
-  -- ["f"] = {
-  --   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-  --   "Find files",
-  -- },
   ["f"] = {
     "<cmd>Telescope find_files<cr>",
     "Find files",
@@ -59,6 +55,10 @@ local mappings = {
   },
 
   s = {
+  -- ["f"] = {
+  --   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+  --   "Find files",
+  -- },
     name = "Search",
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     d = { "<cmd>Telescope lsp_definitions<cr>", "Lsp definitions" },

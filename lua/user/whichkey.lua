@@ -18,8 +18,12 @@ local mappings = {
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 
   -- Telescope
+  -- ["f"] = {
+  --   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+  --   "Find files",
+  -- },
   ["f"] = {
-    "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+    "<cmd>Telescope find_files<cr>",
     "Find files",
   },
   ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
@@ -44,6 +48,8 @@ local mappings = {
     name = "Diagnostics",
     d = { "<cmd>lua vim.diagnostic.setqflist()<cr>", "Project diagnostic" },
     f = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Document Diagnostics" },
+    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code action" },
+    i = { "<cmd>NullLsInfo<cr>", "NullLs info" },
   },
 
   -- LSP

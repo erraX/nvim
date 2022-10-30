@@ -103,8 +103,10 @@ return packer.startup(function(use)
 
   -- Themes
   use { "sainnhe/gruvbox-material" }
+
   use { "folke/which-key.nvim" }
 
+  use { "tpope/vim-surround" }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

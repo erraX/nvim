@@ -49,9 +49,17 @@ local mappings = {
   },
 
   -- LSP
-  o = {
+  l = {
     name = "LSP",
-    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+    f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
+    i = { "<cmd>LspInfo<cr>", "Lsp info" },
+    I = { "<cmd>LspInstallInfo<cr>", "Lsp install info" },
+    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code action" },
+    j = { "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", "Next diagnostic" },
+    k = { "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", "Prev diagnostic" },
+    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+    s = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help" },
+    q = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "Local result" },
   },
 
   s = {

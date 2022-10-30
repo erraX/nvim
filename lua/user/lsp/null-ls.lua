@@ -27,12 +27,16 @@ null_ls.setup {
     code_actions.eslint_d,
   },
   on_attach = function(client, bufnr)
+    if client.name == "tsserver" or client.name == "vuels" then
+      client.resolved_capabilities.document_formatting = false
+    end
+
     if client.supports_method("textDocument/formatting") then
       vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = augroup,
         callback = function()
-          vim.lsp.buf.formatting_sync()
+          vim.lsp.buf.format()
         end,
     })
     end

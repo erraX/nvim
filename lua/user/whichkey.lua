@@ -17,6 +17,18 @@ local mappings = {
   -- Utils
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 
+  -- Telescope
+  ["f"] = {
+    "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+    "Find files",
+  },
+  ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+  ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+  ["b"] = {
+    "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+    "Buffers",
+  },
+
   -- Packer
   p = {
     name = "Packer",

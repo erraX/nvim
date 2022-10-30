@@ -39,11 +39,31 @@ local mappings = {
     u = { "<cmd>PackerUpdate<cr>", "Update" },
   },
 
+  -- Diagnostics
+  d = {
+    name = "Diagnostics",
+    d = { "<cmd>lua vim.diagnostic.setqflist()<cr>", "Project diagnostic" },
+    f = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Document Diagnostics" },
+  },
+
   -- LSP
   o = {
     name = "LSP",
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
-  }
+  },
+
+  s = {
+    name = "Search",
+    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    d = { "<cmd>Telescope lsp_definitions<cr>", "Lsp definitions" },
+    c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+    h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+    M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+    r = { "<cmd>Telescope lsp_references<cr>", "Lsp references" },
+    R = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+    k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+    C = { "<cmd>Telescope commands<cr>", "Commands" },
+  },
 }
 
 local opts = {

@@ -8,6 +8,7 @@ local servers = {
 	"jsonls",
 	"yamlls",
   "volar",
+  "graphql",
 }
 
 local settings = {

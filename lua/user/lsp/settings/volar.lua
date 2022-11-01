@@ -1,4 +1,4 @@
-require('lspconfig').volar.setup({
+return {
   filetypes = {
     'typescript',
     'javascript',
@@ -7,4 +7,4 @@ require('lspconfig').volar.setup({
     'vue',
     'json'
   }
-})
+}

@@ -9,6 +9,7 @@ local servers = {
 	"yamlls",
   "volar",
   "graphql",
+  "perlnavigator",
 }
 
 local settings = {

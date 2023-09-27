@@ -73,7 +73,7 @@ return packer.startup(function(use)
   use { "hrsh7th/cmp-nvim-lua", commit = "d276254e7198ab7d00f117e88e223b4bd8c02d21" }
 
   -- snippets
-  use { "L3MON4D3/LuaSnip", commit = "8f8d493e7836f2697df878ef9c128337cbf2bb84" } --snippet engine
+  use { "L3MON4D3/LuaSnip", commit = "480b032" } --snippet engine
   use { "rafamadriz/friendly-snippets", commit = "2be79d8a9b03d4175ba6b3d14b082680de1b31b1" } -- a bunch of snippets to use
 
   -- LSP
@@ -109,6 +109,21 @@ return packer.startup(function(use)
 
   use { "KenN7/vim-arsync" }
   use { "tpope/vim-fugitive" }
+
+  use {'kevinhwang91/nvim-bqf', ft = 'qf'}
+
+  use {'sainnhe/sonokai'}
+
+  -- optional
+  use {'junegunn/fzf', run = function()
+      vim.fn['fzf#install']()
+      end
+  }
+
+  use {'windwp/nvim-ts-autotag'}
+
+  -- optional, highly recommended
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

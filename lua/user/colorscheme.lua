@@ -1,5 +1,6 @@
-local colorscheme = "tokyonight-night"
+-- local colorscheme = "tokyonight-night"
 -- local colorscheme = "gruvbox-material"
+local colorscheme = "sonokai"
 
 vim.g.gruvbox_material_background = "soft"
 vim.g.gruvbox_material_foreground = "original"

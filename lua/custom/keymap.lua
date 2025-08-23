@@ -1,6 +1,8 @@
 -- -- For conciseness
 local opts = { noremap = true, silent = true }
 
+vim.keymap.set('n', 'q', '<Nop>', { noremap = true })
+
 -- Navigation
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Press jk to enter normal mode' })
 -- vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Vertical scroll down and center' })

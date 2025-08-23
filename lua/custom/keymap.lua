@@ -3,17 +3,22 @@ local opts = { noremap = true, silent = true }
 
 -- Navigation
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Press jk to enter normal mode' })
-vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Vertical scroll down and center' })
-vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Vertical scroll up and center' })
+-- vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Vertical scroll down and center' })
+-- vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Vertical scroll up and center' })
 vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Find next and center' })
 vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Find previous and center' })
+vim.keymap.set('n', 'j', 'gj', opts)
+vim.keymap.set('n', 'k', 'gk', opts)
+vim.keymap.set('n', '0', '^', opts)
 
 -- LSP
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'LSP: Go to Definition' })
 
 -- Clipboard
-vim.keymap.set('n', 'x', '"_x', { noremap = true, silent = true, desc = 'Delete without sync to system clipboard' })
-vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true, desc = 'Keep last yanked when pasting' })
+-- vim.keymap.set('n', 'x', '"_x', { noremap = true, silent = true, desc = 'Delete without sync to system clipboard' })
+-- vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true, desc = 'Keep last yanked when pasting' })
+vim.keymap.set('v', '<C-c>', '"+y', opts)
+-- vim.keymap.set('v', 'p', '"_dP', opts)
 
 -- Misc
 vim.keymap.set('n', '<C-s>', '<cmd>w<CR>', { noremap = true, silent = true, desc = 'Save file' })

@@ -828,6 +828,19 @@ require('lazy').setup({
       vim.lsp.config('vtsls', vtsls_config)
       vim.lsp.config('vue_ls', vue_ls_config)
       vim.lsp.enable { 'vtsls', 'vue_ls' }
+
+      local lspconfig = require 'lspconfig'
+
+      -- lspconfig.eslint.setup {}
+      lspconfig.eslint.setup {
+        on_attach = function(client, bufnr)
+          -- 保存时自动修复
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            buffer = bufnr,
+            command = 'EslintFixAll',
+          })
+        end,
+      }
     end,
   },
 

@@ -13,6 +13,7 @@ vim.keymap.set('n', '0', '^', opts)
 
 -- LSP
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'LSP: Go to Definition' })
+vim.keymap.set('n', '<leader>lf', ':EslintFixAll <CR>', opts)
 
 -- Clipboard
 -- vim.keymap.set('n', 'x', '"_x', { noremap = true, silent = true, desc = 'Delete without sync to system clipboard' })

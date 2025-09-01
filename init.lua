@@ -828,6 +828,7 @@ require('lazy').setup({
       vim.lsp.config('vtsls', vtsls_config)
       vim.lsp.config('vue_ls', vue_ls_config)
       vim.lsp.enable { 'vtsls', 'vue_ls' }
+      vim.lsp.enable 'gopls'
 
       local lspconfig = require 'lspconfig'
 
@@ -1081,6 +1082,7 @@ require('lazy').setup({
         'markdown_inline',
         'query',
         'vue',
+        'go',
         'vim',
         'vimdoc',
       },

@@ -19,7 +19,7 @@ vim.keymap.set('n', '<leader>lf', ':EslintFixAll <CR>', opts)
 
 -- Clipboard
 -- vim.keymap.set('n', 'x', '"_x', { noremap = true, silent = true, desc = 'Delete without sync to system clipboard' })
--- vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true, desc = 'Keep last yanked when pasting' })
+vim.keymap.set('x', 'p', '"_dP', { desc = 'Visual paste without overwriting register' })
 vim.keymap.set('v', '<C-c>', '"+y', opts)
 -- vim.keymap.set('v', 'p', '"_dP', opts)
 

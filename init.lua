@@ -347,6 +347,25 @@ require('lazy').setup({
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>gg', '<cmd>G<cr>', desc = 'Git status' },
+        { '<leader>lh', '<cmd>lua vim.lsp.buf.hover()<cr>', desc = 'Hover current item' },
+        {
+          '<leader>fG',
+          function()
+            local glob = vim.fn.input 'rg --glob (可多次，示例: !**/node_modules/** *.ts *.vue): '
+            local globs = {}
+            for g in glob:gmatch '%S+' do
+              table.insert(globs, '-g')
+              table.insert(globs, g)
+            end
+            require('telescope.builtin').live_grep {
+              additional_args = function()
+                return globs
+              end,
+            }
+          end,
+          desc = 'Live Grep with --glob',
+        },
       },
     },
   },

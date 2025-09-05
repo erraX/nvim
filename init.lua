@@ -931,6 +931,12 @@ require('lazy').setup({
           end
           return 'make install_jsregexp'
         end)(),
+        config = function()
+          local ls = require 'luasnip'
+          ls.filetype_extend('typescriptreact', { 'javascript', 'typescript' })
+          ls.filetype_extend('javascriptreact', { 'javascript' })
+          ls.filetype_extend('vue', { 'javascript', 'typescript' })
+        end,
         dependencies = {
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
@@ -938,14 +944,13 @@ require('lazy').setup({
           {
             'rafamadriz/friendly-snippets',
             config = function()
-              -- require('luasnip.loaders.from_vscode').lazy_load()
+              require('luasnip.loaders.from_vscode').lazy_load()
               require('luasnip.loaders.from_vscode').lazy_load {
-                paths = { vim.fn.expand '~/.config/nvim/my-snippets' },
+                paths = { vim.fn.expand '~/.config/nvim/lua/snippets' },
               }
             end,
           },
         },
-        opts = {},
       },
       'folke/lazydev.nvim',
     },

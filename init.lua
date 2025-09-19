@@ -457,6 +457,20 @@ require('lazy').setup({
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
 
+      vim.api.nvim_create_user_command('TelescopeDotfiles', function()
+        require('telescope.builtin').find_files {
+          prompt_title = 'Dotfiles',
+          cwd = vim.fn.expand '~',
+          search_dirs = {
+            vim.fn.expand '~/.config',
+            vim.fn.expand '~/.zshrc',
+            vim.fn.expand '~/.tmux.conf',
+          },
+          follow = true,
+          hidden = true,
+        }
+      end, {})
+
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[S]earch [H]elp' })
@@ -469,6 +483,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader>fD', '<cmd>TelescopeDotfiles<CR>', { desc = '[ ] Find dotfiles' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()

@@ -349,6 +349,7 @@ require('lazy').setup({
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         { '<leader>gg', '<cmd>G<cr>', desc = 'Git status' },
         { '<leader>lh', '<cmd>lua vim.lsp.buf.hover()<cr>', desc = 'Hover current item' },
+        { '<leader>bd', '<cmd>:%bd|e#|bd#<cr>|\'"<cr>', desc = 'Delete all other buffers' },
         {
           '<leader>fG',
           function()
@@ -849,6 +850,11 @@ require('lazy').setup({
 
       local vtsls_config = {
         settings = {
+          typescript = {
+            tsserver = {
+              maxTsServerMemory = 8192,
+            },
+          },
           vtsls = {
             tsserver = {
               globalPlugins = {
@@ -1048,27 +1054,12 @@ require('lazy').setup({
     'folke/tokyonight.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
+      ---@diagnostic disable-next-line: missing-fields
       require('tokyonight').setup {
         styles = {
           comments = { italic = false }, -- Disable italics in comments
         },
       }
-    end,
-  },
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'EdenEast/nightfox.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      -- require('tokyonight').setup {
-      --   styles = {
-      --     comments = { italic = false }, -- Disable italics in comments
-      --   },
-      -- }
 
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
@@ -1086,10 +1077,11 @@ require('lazy').setup({
         vim.o.background = 'dark'
         vim.cmd.colorscheme 'tokyonight-storm'
       else
+        -- vim.o.background = 'light'
+        -- vim.cmd.colorscheme 'tokyonight-day'
+
         vim.o.background = 'dark'
         vim.cmd.colorscheme 'tokyonight-storm'
-        -- vim.o.background = 'light'
-        -- vim.cmd.colorscheme 'dayfox'
       end
     end,
   },

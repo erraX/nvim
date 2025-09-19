@@ -1029,6 +1029,21 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+    'folke/tokyonight.nvim',
+    priority = 1000, -- Make sure to load this before all the other start plugins.
+    config = function()
+      require('tokyonight').setup {
+        styles = {
+          comments = { italic = false }, -- Disable italics in comments
+        },
+      }
+    end,
+  },
+  { -- You can easily change to a different colorscheme.
+    -- Change the name of the colorscheme plugin below, and then
+    -- change the command in the config to whatever the name of that colorscheme is.
+    --
+    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     'EdenEast/nightfox.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
@@ -1053,10 +1068,12 @@ require('lazy').setup({
 
       if mac_is_dark() then
         vim.o.background = 'dark'
-        vim.cmd.colorscheme 'nightfox'
+        vim.cmd.colorscheme 'tokyonight-storm'
       else
-        vim.o.background = 'light'
-        vim.cmd.colorscheme 'dayfox'
+        vim.o.background = 'dark'
+        vim.cmd.colorscheme 'tokyonight-storm'
+        -- vim.o.background = 'light'
+        -- vim.cmd.colorscheme 'dayfox'
       end
     end,
   },

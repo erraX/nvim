@@ -31,8 +31,10 @@ vim.keymap.set('n', '<C-q>', '<cmd>q<CR>', { noremap = true, silent = true, desc
 -- Buffers
 vim.keymap.set('n', '<S-h>', ':bprevious<CR>', { noremap = true, silent = true, desc = 'Previous buffer' })
 vim.keymap.set('n', '<S-l>', ':bnext<CR>', { noremap = true, silent = true, desc = 'Next buffer' })
-vim.keymap.set('n', '<C-w>', ':Bdelete!<CR>', { noremap = true, silent = true, desc = 'Close buffer' })
 vim.keymap.set('n', '<leader>n', '<cmd> enew <CR>', { noremap = true, silent = true, desc = 'New buffer' })
+vim.keymap.set('n', '<S-w>', function()
+  require('mini.bufremove').delete(0, false)
+end, { desc = 'Delete buffer (keep window)' })
 
 -- Window management
 vim.keymap.set('n', '<leader>v', '<C-w>v', opts) -- split window vertically

@@ -1,7 +1,7 @@
 return {
   'akinsho/bufferline.nvim',
   dependencies = {
-    'moll/vim-bbye',
+    'nvim-mini/mini.nvim',
     'nvim-tree/nvim-web-devicons',
   },
   config = function()

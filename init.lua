@@ -485,6 +485,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<leader>fD', '<cmd>TelescopeDotfiles<CR>', { desc = '[ ] Find dotfiles' })
+      vim.keymap.set('n', '<leader>fp', '<cmd>Telescope project<CR>', { desc = '[ ] Find projects' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()

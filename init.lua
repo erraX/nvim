@@ -782,12 +782,19 @@ require('lazy').setup({
         --   end,
         -- },
         --
-        -- eslint = {
-        --   settings = {
-        --     -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
-        --     workingDirectory = { mode = 'auto' },
-        --   },
-        -- },
+        eslint = {
+          settings = {
+            -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+            workingDirectory = { mode = 'auto' },
+          },
+          on_attach = function(_, bufnr)
+            -- Auto-fix on save
+            vim.api.nvim_create_autocmd('BufWritePre', {
+              buffer = bufnr,
+              command = 'EslintFixAll',
+            })
+          end,
+        },
 
         lua_ls = {
           -- cmd = { ... },
@@ -821,6 +828,7 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'eslint-lsp', -- Ensure ESLint server is available via Mason
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -872,18 +880,7 @@ require('lazy').setup({
       vim.lsp.enable { 'vtsls', 'vue_ls' }
       vim.lsp.enable 'gopls'
 
-      local lspconfig = require 'lspconfig'
-
-      -- lspconfig.eslint.setup {}
-      lspconfig.eslint.setup {
-        on_attach = function(client, bufnr)
-          -- 保存时自动修复
-          vim.api.nvim_create_autocmd('BufWritePre', {
-            buffer = bufnr,
-            command = 'EslintFixAll',
-          })
-        end,
-      }
+      -- ESLint is configured above in `servers` and enabled via mason-lspconfig handler
 
       vim.lsp.enable 'sourcekit'
     end,

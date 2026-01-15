@@ -1079,11 +1079,11 @@ require('lazy').setup({
         vim.o.background = 'dark'
         vim.cmd.colorscheme 'tokyonight-storm'
       else
-        -- vim.o.background = 'light'
-        -- vim.cmd.colorscheme 'tokyonight-day'
+        vim.o.background = 'light'
+        vim.cmd.colorscheme 'tokyonight-day'
 
-        vim.o.background = 'dark'
-        vim.cmd.colorscheme 'tokyonight-storm'
+        -- vim.o.background = 'dark'
+        -- vim.cmd.colorscheme 'tokyonight-storm'
       end
     end,
   },

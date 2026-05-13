@@ -428,6 +428,7 @@ require('lazy').setup({
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         defaults = {
+          path_display = { 'filename_first' },
           mappings = {
             i = {
               ['<C-k>'] = require('telescope.actions').move_selection_previous, -- move to prev result

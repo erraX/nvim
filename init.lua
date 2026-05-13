@@ -1071,21 +1071,9 @@ require('lazy').setup({
       -- vim.cmd.colorscheme 'dayfox'
       -- vim.cmd.colorscheme 'nightfox'
 
-      local function mac_is_dark()
-        local ok, out = pcall(vim.fn.system, { 'defaults', 'read', '-g', 'AppleInterfaceStyle' })
-        return ok and out:match 'Dark'
-      end
-
-      if mac_is_dark() then
-        vim.o.background = 'dark'
-        vim.cmd.colorscheme 'tokyonight-storm'
-      else
-        vim.o.background = 'light'
-        vim.cmd.colorscheme 'tokyonight-day'
-
-        -- vim.o.background = 'dark'
-        -- vim.cmd.colorscheme 'tokyonight-storm'
-      end
+      -- Colorscheme is selected by lua/custom/themes.lua based on the
+      -- ~/.config/nvim/current_theme file. tokyonight is kept installed as
+      -- a fallback option but is not auto-applied here.
     end,
   },
   --
@@ -1244,3 +1232,4 @@ require('lazy').setup({
 
 require 'custom.keymap'
 require 'custom.options'
+require('custom.themes').setup_theme_watcher()

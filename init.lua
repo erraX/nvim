@@ -879,6 +879,7 @@ require('lazy').setup({
       vim.lsp.config('vue_ls', vue_ls_config)
       vim.lsp.enable { 'vtsls', 'vue_ls' }
       vim.lsp.enable 'gopls'
+      vim.lsp.enable 'perlnavigator'
 
       -- ESLint is configured above in `servers` and enabled via mason-lspconfig handler
 
@@ -925,7 +926,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
+        python = { 'isort', 'black' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
